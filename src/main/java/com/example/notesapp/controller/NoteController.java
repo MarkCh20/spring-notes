@@ -1,5 +1,7 @@
-package com.example.notesapp;
+package com.example.notesapp.controller;
 
+import com.example.notesapp.model.Note;
+import com.example.notesapp.service.NoteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,24 @@ public class NoteController {
         model.addAttribute("notes", noteService.listAll());
         return "note-list";
     }
+
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
+        model.addAttribute("note", new Note());
+        return "note-add";
+    }
+
+    @PostMapping("/add")
+    public String addNote(@Valid @ModelAttribute("note") Note note,
+                          BindingResult bindingResult,
+                          Model model) {
+        if (bindingResult.hasErrors()) {
+            return "note-add";
+        }
+        noteService.add(note);
+        return "redirect:/note/list";
+    }
+
 
     @PostMapping("/delete")
     public String delete(@RequestParam Long id) {

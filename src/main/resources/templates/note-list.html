@@ -6,32 +6,42 @@
 </head>
 <body class="bg-light p-4">
 <div class="container">
-    <h1 class="mb-4">📝 Your Notes</h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">📝 Your Notes</h1>
+        <a th:href="@{/note/add}" class="btn btn-success">➕ Add Note</a>
+    </div>
 
-    <table class="table table-hover shadow-sm bg-white rounded">
-        <thead class="table-light">
-        <tr>
-            <th style="width: 20%">Title</th>
-            <th style="width: 60%">Content</th>
-            <th style="width: 20%">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="note : ${notes}">
-            <td th:text="${note.title}"></td>
-            <td th:text="${note.content}"></td>
-            <td>
-                <div class="btn-group">
-                    <a th:href="@{/note/edit(id=${note.id})}" class="btn btn-sm btn-outline-primary">Edit</a>
-                    <form th:action="@{/note/delete}" method="post" th:object="${note}" style="display:inline;">
-                        <input type="hidden" name="id" th:value="${note.id}" />
-                        <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">Delete</button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-striped table-hover mb-0">
+                <thead class="table-light">
+                <tr>
+                    <th style="width: 20%">Title</th>
+                    <th style="width: 60%">Content</th>
+                    <th style="width: 20%">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="note : ${notes}">
+                    <td th:text="${note.title}"></td>
+                    <td th:text="${note.content}"></td>
+                    <td>
+                        <div class="btn-group">
+                            <a th:href="@{/note/edit(id=${note.id})}" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <form th:action="@{/note/delete}" method="post" th:object="${note}" th:onsubmit="return confirm('Are you sure?')" style="display:inline;">
+                                <input type="hidden" name="id" th:value="${note.id}" />
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <tr th:if="${notes.size() == 0}">
+                    <td colspan="3" class="text-center text-muted py-3">No notes found. Add one using the button above.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 </body>
 </html>

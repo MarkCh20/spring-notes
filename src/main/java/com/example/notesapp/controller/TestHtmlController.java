@@ -1,4 +1,4 @@
-package com.example.notesapp;
+package com.example.notesapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
