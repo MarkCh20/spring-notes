@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import java.util.List;
 
@@ -28,6 +29,7 @@ class NoteControllerTest {
     private NoteService noteService;
 
     @Test
+    @WithMockUser(username = "testuser")
     void whenListNotes_thenReturnListView() throws Exception {
         when(noteService.listAll()).thenReturn(List.of(new Note(1L, "A", "B")));
 

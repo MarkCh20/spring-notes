@@ -8,7 +8,12 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="mb-0">📝 Your Notes</h1>
-        <a th:href="@{/note/add}" class="btn btn-success">➕ Add Note</a>
+        <div>
+            <a th:href="@{/note/add}" class="btn btn-success me-2">➕ Add Note</a>
+            <form th:action="@{/logout}" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-outline-secondary">🚪 Logout</button>
+            </form>
+        </div>
     </div>
 
     <div class="card shadow-sm">

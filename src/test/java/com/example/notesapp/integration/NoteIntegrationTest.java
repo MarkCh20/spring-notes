@@ -1,4 +1,4 @@
-package com.example.notesapp;
+package com.example.notesapp.integration;
 
 import com.example.notesapp.model.Note;
 import com.example.notesapp.repository.NoteRepository;
