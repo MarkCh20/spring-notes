@@ -38,6 +38,8 @@ dependencies {
 
 	testImplementation 'org.springframework.security:spring-security-test'
 
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+
 }
 
 tasks.named('test') {
